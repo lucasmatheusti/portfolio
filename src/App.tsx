@@ -237,13 +237,13 @@ function AboutSection() {
 
           {/* Right: Content */}
           <motion.div variants={fadeInUp} className="lg:col-span-3 space-y-5">
-            <p className="text-[#d1d5db] text-base sm:text-lg leading-relaxed">
+            <p className="text-[#e5e7eb] text-base sm:text-lg leading-relaxed">
               Atuo como <strong className="text-[#f3f4f6] font-semibold">Técnico de TI em Suporte</strong>, com foco prático em montagem e manutenção de hardware, estruturação de bancadas de atendimento e gestão de infraestrutura técnica para eventos de grande porte.
             </p>
-            <p className="text-[#d1d5db] text-base sm:text-lg leading-relaxed">
+            <p className="text-[#e5e7eb] text-base sm:text-lg leading-relaxed">
               Paralelamente, desenvolvo <strong className="text-[#f3f4f6] font-semibold">automações e soluções tecnológicas</strong> sob medida — orquestrando IA para conceber softwares utilitários, PWAs e ferramentas internas que resolvem problemas reais de fluxo de trabalho.
             </p>
-            <p className="text-[#b0b5bf] text-sm sm:text-base leading-relaxed">
+            <p className="text-[#d1d5db] text-sm sm:text-base leading-relaxed">
               Minha abordagem é direta: entender o problema, estruturar a solução e entregar resultado. Sem promessas vazias — apenas execução técnica de ponta a ponta.
             </p>
 
