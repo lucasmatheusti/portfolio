@@ -147,7 +147,7 @@ function HeroSection() {
           </motion.p>
 
           {/* Bio — contraste elevado para leitura confortável */}
-          <motion.p variants={fadeInUp} className="max-w-3xl mx-auto text-[#d1d5db] text-base sm:text-lg leading-relaxed mb-10">
+          <motion.p variants={fadeInUp} className="max-w-3xl mx-auto text-base sm:text-lg leading-relaxed mb-10" style={{ color: '#f1f5f9' }}>
             Sou Lucas Matheus, técnico de TI em suporte e especialista em criar soluções tecnológicas práticas e eficientes.
             Unindo suporte de hardware, visão estratégica e foco em resolver problemas reais de ponta a ponta, atuo orquestrando
             ferramentas de inteligência artificial para conceber, estruturar e validar softwares utilitários, automações e PWAs
@@ -266,6 +266,74 @@ function AboutSection() {
 }
 
 /* ─────────────────────────────────────────────
+   TECH STACK SECTION
+   ───────────────────────────────────────────── */
+function TechStackSection() {
+  const techCategories = [
+    {
+      title: 'Frontend & UI',
+      items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3']
+    },
+    {
+      title: 'Backend & Database',
+      items: ['Node.js', 'Python', 'Supabase', 'Firebase', 'Redis', 'PostgreSQL']
+    },
+    {
+      title: 'Desktop & Mobile',
+      items: ['Electron', 'PWA', 'WebRTC', 'Responsive Design']
+    },
+    {
+      title: 'DevOps & Tools',
+      items: ['Docker', 'Vercel', 'Git', 'VBA', 'PowerShell', 'Bash']
+    }
+  ];
+
+  return (
+    <AnimatedSection className="py-20 sm:py-24 bg-[#050505] relative">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-[#1f1f23] to-transparent" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div variants={fadeInUp} className="text-center mb-12">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f59e0b]/10 border border-[#f59e0b]/20 text-[#f59e0b] text-xs font-medium mb-4">
+            <Code2 className="w-3 h-3" />
+            TECNOLOGIAS
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#f3f4f6] mb-4">Stack Tecnológico</h2>
+          <p className="text-[#cbd5e1] max-w-2xl mx-auto" style={{ color: '#cbd5e1' }}>
+            Ferramentas e tecnologias que utilizo para construir soluções eficientes e escaláveis.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {techCategories.map((category, catIndex) => (
+            <motion.div
+              key={catIndex}
+              variants={scaleIn}
+              className="glass-card rounded-xl p-5"
+            >
+              <h3 className="text-sm font-semibold text-[#60a5fa] mb-4 uppercase tracking-wide">
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {category.items.map((item, itemIndex) => (
+                  <span
+                    key={itemIndex}
+                    className="px-3 py-1.5 rounded-lg bg-[#0f0f10] border border-[#1f1f23] text-xs font-medium hover:border-[#3b82f6]/40 hover:text-[#60a5fa] transition-all duration-200 cursor-default"
+                    style={{ color: '#e2e8f0' }}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+}
+
+/* ─────────────────────────────────────────────
    SPECIALTIES SECTION
    ───────────────────────────────────────────── */
 function SpecialtiesSection() {
@@ -329,7 +397,7 @@ function SpecialtiesSection() {
               <h3 className="text-lg font-semibold text-[#f3f4f6] mb-3">{spec.title}</h3>
 
               {/* Description */}
-              <p className="text-[#b0b5bf] text-sm leading-relaxed mb-6">{spec.description}</p>
+              <p className="text-sm leading-relaxed mb-6" style={{ color: '#cbd5e1' }}>{spec.description}</p>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2">
@@ -603,12 +671,12 @@ function ProjectsSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-semibold text-[#f3f4f6] mb-2 group-hover:text-[#60a5fa] transition-colors duration-300">
+                <h3 className="text-base font-semibold mb-2 group-hover:text-[#60a5fa] transition-colors duration-300" style={{ color: '#ffffff' }}>
                   {project.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-[#b0b5bf] text-sm leading-relaxed mb-4">
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#cbd5e1' }}>
                   {project.description}
                 </p>
 
@@ -749,18 +817,79 @@ function Footer() {
 }
 
 /* ─────────────────────────────────────────────
+   SCROLL PROGRESS INDICATOR
+   ───────────────────────────────────────────── */
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const currentProgress = (window.scrollY / totalHeight) * 100;
+      setProgress(currentProgress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="fixed top-0 left-0 right-0 z-[60] h-[2px] bg-transparent">
+      <div
+        className="h-full bg-gradient-to-r from-[#3b82f6] via-[#60a5fa] to-[#3b82f6] transition-all duration-150 ease-out shadow-sm shadow-[#3b82f6]/50"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   BACK TO TOP BUTTON
+   ───────────────────────────────────────────── */
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setVisible(window.scrollY > 500);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      aria-label="Voltar ao topo"
+      className={`fixed bottom-6 right-6 z-50 w-11 h-11 rounded-xl bg-[#0f0f10] border border-[#1f1f23] flex items-center justify-center text-[#3b82f6] hover:bg-[#141416] hover:border-[#3b82f6]/40 transition-all duration-300 shadow-lg shadow-black/30 ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
+    </button>
+  );
+}
+
+/* ─────────────────────────────────────────────
    MAIN APP
    ───────────────────────────────────────────── */
 export default function App() {
   return (
     <div className="min-h-screen bg-[#050505] text-[#f3f4f6] font-sans">
+      <ScrollProgress />
       <Navbar />
       <HeroSection />
       <AboutSection />
+      <TechStackSection />
       <SpecialtiesSection />
       <ProjectsSection />
       <ContactSection />
       <Footer />
+      <BackToTop />
     </div>
   );
 }
