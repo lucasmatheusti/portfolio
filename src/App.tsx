@@ -187,18 +187,7 @@ function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <a href="#sobre" className="flex flex-col items-center gap-2 text-[#6b7280] hover:text-[#d1d5db] transition-colors duration-200">
-            <span className="text-xs font-medium">Explorar</span>
-            <ChevronDown className="w-5 h-5 animate-bounce" />
-          </a>
-        </motion.div>
+
       </div>
     </section>
   );
@@ -485,7 +474,8 @@ function ProjectsSection() {
       tags: ['Next.js', 'Supabase', 'Vercel', 'PWA'],
       icon: <Smartphone className="w-5 h-5" />,
       status: 'development' as ProjectStatus,
-      highlight: false
+      highlight: false,
+      demoUrl: 'https://vesperfinancas.vercel.app/'
     },
     {
       category: 'software',
@@ -692,10 +682,19 @@ function ProjectsSection() {
                   ))}
                 </div>
 
-                {/* Hover link indicator */}
-                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ExternalLink className="w-4 h-4 text-[#3b82f6]" />
-                </div>
+                {/* Demo button (only if demoUrl exists) */}
+                {'demoUrl' in project && project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#3b82f6]/10 border border-[#3b82f6]/30 text-[#60a5fa] text-xs font-medium hover:bg-[#3b82f6]/20 hover:border-[#3b82f6]/50 transition-all duration-300"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    Ver Demo
+                  </a>
+                )}
               </motion.div>
             ))}
           </motion.div>
