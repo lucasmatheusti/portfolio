@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   Monitor, Cpu, Wrench, Zap, Calendar, Code2,
-  Mail, Linkedin, MessageCircle, ChevronDown,
+  Mail, Instagram, MessageCircle, ChevronDown,
   Terminal, Shield, Globe, Smartphone,
   ArrowUpRight, ExternalLink, Filter,
   User, CheckCircle2, Clock, Beaker
@@ -91,7 +91,7 @@ function Navbar() {
             <a href="#contato" className="text-sm text-[#d1d5db] hover:text-[#f3f4f6] transition-colors duration-200">Contato</a>
           </div>
           <a
-            href="https://wa.me/5500000000000"
+            href="https://wa.me/5511978863129"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 bg-[#3b82f6]/10 border border-[#3b82f6]/30 rounded-lg text-[#3b82f6] text-sm font-medium hover:bg-[#3b82f6]/20 hover:border-[#3b82f6]/50 transition-all duration-300"
@@ -157,7 +157,7 @@ function HeroSection() {
           {/* CTA Buttons */}
           <motion.div variants={fadeInUp} className="flex flex-wrap items-center justify-center gap-4">
             <a
-              href="https://wa.me/5500000000000"
+              href="https://wa.me/5511978863129"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-2 px-6 py-3 bg-[#3b82f6] text-white rounded-xl font-medium text-sm hover:bg-[#2563eb] transition-all duration-300 hover:shadow-lg hover:shadow-[#3b82f6]/25 hover:-translate-y-0.5"
@@ -167,7 +167,7 @@ function HeroSection() {
               <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </a>
             <a
-              href="mailto:lucas@email.com"
+              href="mailto:lucas19980112@gmail.com"
               className="group flex items-center gap-2 px-6 py-3 bg-[#0f0f10] border border-[#2a2a30] text-[#e5e7eb] rounded-xl font-medium text-sm hover:border-[#3b82f6]/50 hover:text-[#f3f4f6] transition-all duration-300 hover:-translate-y-0.5"
             >
               <Mail className="w-4 h-4" />
@@ -175,13 +175,13 @@ function HeroSection() {
               <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </a>
             <a
-              href="https://linkedin.com/in/lucasmatheus"
+              href="https://instagram.com/lucasmatheus.ti"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-2 px-6 py-3 bg-[#0f0f10] border border-[#2a2a30] text-[#e5e7eb] rounded-xl font-medium text-sm hover:border-[#3b82f6]/50 hover:text-[#f3f4f6] transition-all duration-300 hover:-translate-y-0.5"
             >
-              <Linkedin className="w-4 h-4" />
-              LinkedIn
+              <Instagram className="w-4 h-4" />
+              Instagram
               <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </a>
           </motion.div>
@@ -726,7 +726,7 @@ function ContactSection() {
         <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {/* WhatsApp */}
           <a
-            href="https://wa.me/5500000000000"
+            href="https://wa.me/5511978863129"
             target="_blank"
             rel="noopener noreferrer"
             className="glass-card rounded-2xl p-6 text-center group hover:border-emerald-500/30 transition-all duration-300"
@@ -740,7 +740,7 @@ function ContactSection() {
 
           {/* Email */}
           <a
-            href="mailto:lucas@email.com"
+            href="mailto:lucas19980112@gmail.com"
             className="glass-card rounded-2xl p-6 text-center group hover:border-[#3b82f6]/30 transition-all duration-300"
           >
             <div className="w-12 h-12 rounded-xl bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#3b82f6]/20 transition-colors duration-300">
@@ -752,16 +752,16 @@ function ContactSection() {
 
           {/* LinkedIn */}
           <a
-            href="https://linkedin.com/in/lucasmatheus"
+            href="https://instagram.com/lucasmatheus.ti"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-2xl p-6 text-center group hover:border-[#3b82f6]/30 transition-all duration-300"
+            className="glass-card rounded-2xl p-6 text-center group hover:border-[#f59e0b]/30 transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-xl bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#3b82f6]/20 transition-colors duration-300">
-              <Linkedin className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#f59e0b]/20 to-[#ec4899]/20 text-[#f59e0b] flex items-center justify-center mx-auto mb-4 group-hover:from-[#f59e0b]/30 group-hover:to-[#ec4899]/30 transition-all duration-300">
+              <Instagram className="w-6 h-6" />
             </div>
-            <h3 className="text-sm font-semibold text-[#f3f4f6] mb-1">LinkedIn</h3>
-            <p className="text-xs text-[#6b7280]">Networking profissional</p>
+            <h3 className="text-sm font-semibold text-[#f3f4f6] mb-1">Instagram</h3>
+            <p className="text-xs text-[#6b7280]">@lucasmatheus.ti</p>
           </a>
         </motion.div>
       </div>
@@ -790,13 +790,13 @@ function Footer() {
 
           {/* Links */}
           <div className="flex items-center gap-6">
-            <a href="mailto:lucas@email.com" className="text-[#6b7280] hover:text-[#3b82f6] transition-colors duration-200">
+            <a href="mailto:lucas19980112@gmail.com" className="text-[#6b7280] hover:text-[#3b82f6] transition-colors duration-200">
               <Mail className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com/in/lucasmatheus" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#3b82f6] transition-colors duration-200">
-              <Linkedin className="w-5 h-5" />
+            <a href="https://instagram.com/lucasmatheus.ti" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#f59e0b] transition-colors duration-200">
+              <Instagram className="w-5 h-5" />
             </a>
-            <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-emerald-400 transition-colors duration-200">
+            <a href="https://wa.me/5511978863129" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-emerald-400 transition-colors duration-200">
               <MessageCircle className="w-5 h-5" />
             </a>
           </div>
