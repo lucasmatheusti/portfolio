@@ -10,7 +10,7 @@
   --color-accent-blue: #3b82f6;
   --color-accent-yellow: #f59e0b;
   --color-text-primary: #f3f4f6;
-  --color-text-secondary: #9ca3af;
+  --color-text-secondary: #d1d5db;
   --color-text-muted: #6b7280;
 }
 
@@ -44,6 +44,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ─────────────────────────────────────────────
+   ANIMATIONS
+   ───────────────────────────────────────────── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -57,10 +60,10 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
   }
   50% {
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
   }
 }
 
@@ -68,6 +71,11 @@ body {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 .animate-fade-in-up {
@@ -78,33 +86,78 @@ body {
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
+/* ─────────────────────────────────────────────
+   GLASS CARDS (Base)
+   ───────────────────────────────────────────── */
 .glass-card {
   background: linear-gradient(135deg, rgba(15, 15, 16, 0.8), rgba(20, 20, 22, 0.6));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(31, 31, 35, 0.6);
+  transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(59, 130, 246, 0.3);
-  background: linear-gradient(135deg, rgba(15, 15, 16, 0.9), rgba(20, 20, 22, 0.7));
+  border-color: rgba(59, 130, 246, 0.25);
+  background: linear-gradient(135deg, rgba(15, 15, 16, 0.95), rgba(20, 20, 22, 0.8));
 }
 
+/* ─────────────────────────────────────────────
+   PROJECT CARDS (Elevação + Glow)
+   ───────────────────────────────────────────── */
+.project-card {
+  transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow:
+    0 20px 40px -12px rgba(0, 0, 0, 0.5),
+    0 0 30px -5px rgba(59, 130, 246, 0.12),
+    0 0 60px -10px rgba(59, 130, 246, 0.06);
+}
+
+/* ─────────────────────────────────────────────
+   GRADIENT TEXT
+   ───────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #f3f4f6 0%, #3b82f6 50%, #f3f4f6 100%);
+  background: linear-gradient(135deg, #f3f4f6 0%, #60a5fa 40%, #3b82f6 60%, #f3f4f6 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradient-shift 6s ease infinite;
+  animation: gradient-shift 8s ease infinite;
 }
 
+/* ─────────────────────────────────────────────
+   HERO GRADIENT
+   ───────────────────────────────────────────── */
 .hero-gradient {
-  background: radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 40%),
-              linear-gradient(180deg, #050505 0%, #0a0a0b 100%);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(245, 158, 11, 0.02) 0%, transparent 40%),
+    linear-gradient(180deg, #050505 0%, #0a0a0b 100%);
 }
 
+/* ─────────────────────────────────────────────
+   SECTION GRADIENT
+   ───────────────────────────────────────────── */
 .section-gradient {
   background: linear-gradient(180deg, #050505 0%, #0f0f10 50%, #050505 100%);
+}
+
+/* ─────────────────────────────────────────────
+   SMOOTH TRANSITIONS UTILITIES
+   ───────────────────────────────────────────── */
+.transition-smooth {
+  transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+
+/* Focus visible for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+  border-radius: 8px;
 }

@@ -1,35 +1,50 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   Monitor, Cpu, Wrench, Zap, Calendar, Code2,
   Mail, Linkedin, MessageCircle, ChevronDown,
   Terminal, Shield, Globe, Smartphone,
-  ArrowUpRight, ExternalLink, Filter
+  ArrowUpRight, ExternalLink, Filter,
+  User, Award, FlaskConical, Rocket,
+  CheckCircle2, Clock, Beaker, FileCode2
 } from 'lucide-react';
 
-// Animation variants
+/* ─────────────────────────────────────────────
+   ANIMATION VARIANTS
+   ───────────────────────────────────────────── */
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }
+  }
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 }
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
   }
 };
 
 const scaleIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: 'easeOut' } }
+  hidden: { opacity: 0, scale: 0.92, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }
+  }
 };
 
-// Section wrapper with intersection observer
+/* ─────────────────────────────────────────────
+   ANIMATED SECTION WRAPPER (Intersection Observer)
+   ───────────────────────────────────────────── */
 function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <motion.section
@@ -44,7 +59,9 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
   );
 }
 
-// Navigation
+/* ─────────────────────────────────────────────
+   NAVBAR
+   ───────────────────────────────────────────── */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -55,27 +72,30 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-[#050505]/90 backdrop-blur-xl border-b border-[#1f1f23]/60' : 'bg-transparent'
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled
+        ? 'bg-[#050505]/95 backdrop-blur-2xl border-b border-[#1f1f23]/60 shadow-lg shadow-black/20'
+        : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] flex items-center justify-center">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] flex items-center justify-center shadow-lg shadow-[#3b82f6]/20">
               <Terminal className="w-4 h-4 text-white" />
             </div>
-            <span className="font-semibold text-sm text-[#f3f4f6]">Lucas Matheus</span>
+            <span className="font-semibold text-sm text-[#f3f4f6] tracking-tight">Lucas Matheus</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#especialidades" className="text-sm text-[#9ca3af] hover:text-[#f3f4f6] transition-colors">Especialidades</a>
-            <a href="#projetos" className="text-sm text-[#9ca3af] hover:text-[#f3f4f6] transition-colors">Projetos</a>
-            <a href="#contato" className="text-sm text-[#9ca3af] hover:text-[#f3f4f6] transition-colors">Contato</a>
+            <a href="#sobre" className="text-sm text-[#d1d5db] hover:text-[#f3f4f6] transition-colors duration-200">Sobre</a>
+            <a href="#especialidades" className="text-sm text-[#d1d5db] hover:text-[#f3f4f6] transition-colors duration-200">Especialidades</a>
+            <a href="#projetos" className="text-sm text-[#d1d5db] hover:text-[#f3f4f6] transition-colors duration-200">Projetos</a>
+            <a href="#contato" className="text-sm text-[#d1d5db] hover:text-[#f3f4f6] transition-colors duration-200">Contato</a>
           </div>
           <a
             href="https://wa.me/5500000000000"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-[#3b82f6]/10 border border-[#3b82f6]/30 rounded-lg text-[#3b82f6] text-sm font-medium hover:bg-[#3b82f6]/20 transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-[#3b82f6]/10 border border-[#3b82f6]/30 rounded-lg text-[#3b82f6] text-sm font-medium hover:bg-[#3b82f6]/20 hover:border-[#3b82f6]/50 transition-all duration-300"
           >
             <MessageCircle className="w-4 h-4" />
             <span className="hidden sm:inline">Contato</span>
@@ -86,19 +106,21 @@ function Navbar() {
   );
 }
 
-// Hero Section
+/* ─────────────────────────────────────────────
+   HERO SECTION (Contraste Corrigido)
+   ───────────────────────────────────────────── */
 function HeroSection() {
   return (
     <section className="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
       {/* Background grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
+      <div className="absolute inset-0 opacity-[0.025]" style={{
         backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
         backgroundSize: '60px 60px'
       }} />
-      
+
       {/* Glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#3b82f6]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-[#f59e0b]/3 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#3b82f6]/[0.04] rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#f59e0b]/[0.02] rounded-full blur-[80px]" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <motion.div
@@ -107,9 +129,9 @@ function HeroSection() {
           variants={staggerContainer}
         >
           {/* Status badge */}
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0f0f10] border border-[#1f1f23] mb-8">
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0f0f10]/80 border border-[#1f1f23] mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-xs text-[#9ca3af] font-medium">Disponível para projetos</span>
+            <span className="text-xs text-[#d1d5db] font-medium">Disponível para projetos</span>
           </motion.div>
 
           {/* Name */}
@@ -120,16 +142,16 @@ function HeroSection() {
             <span className="text-[#f3f4f6]">do Nascimento</span>
           </motion.h1>
 
-          {/* Title */}
-          <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-[#3b82f6] font-medium mb-6">
+          {/* Title — alto contraste */}
+          <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-[#60a5fa] font-semibold mb-6 tracking-tight">
             Técnico de TI em Suporte & Especialista em Soluções Tecnológicas
           </motion.p>
 
-          {/* Bio */}
-          <motion.p variants={fadeInUp} className="max-w-3xl mx-auto text-[#9ca3af] text-base sm:text-lg leading-relaxed mb-10">
-            Sou Lucas Matheus, técnico de TI em suporte e especialista em criar soluções tecnológicas práticas e eficientes. 
-            Unindo suporte de hardware, visão estratégica e foco em resolver problemas reais de ponta a ponta, atuo orquestrando 
-            ferramentas de inteligência artificial para conceber, estruturar e validar softwares utilitários, automações e PWAs 
+          {/* Bio — contraste elevado para leitura confortável */}
+          <motion.p variants={fadeInUp} className="max-w-3xl mx-auto text-[#d1d5db] text-base sm:text-lg leading-relaxed mb-10">
+            Sou Lucas Matheus, técnico de TI em suporte e especialista em criar soluções tecnológicas práticas e eficientes.
+            Unindo suporte de hardware, visão estratégica e foco em resolver problemas reais de ponta a ponta, atuo orquestrando
+            ferramentas de inteligência artificial para conceber, estruturar e validar softwares utilitários, automações e PWAs
             sob medida, além de gerenciar a infraestrutura técnica e terminais interativos em eventos.
           </motion.p>
 
@@ -139,29 +161,29 @@ function HeroSection() {
               href="https://wa.me/5500000000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-6 py-3 bg-[#3b82f6] text-white rounded-xl font-medium text-sm hover:bg-[#2563eb] transition-all hover:shadow-lg hover:shadow-[#3b82f6]/20"
+              className="group flex items-center gap-2 px-6 py-3 bg-[#3b82f6] text-white rounded-xl font-medium text-sm hover:bg-[#2563eb] transition-all duration-300 hover:shadow-lg hover:shadow-[#3b82f6]/25 hover:-translate-y-0.5"
             >
               <MessageCircle className="w-4 h-4" />
               WhatsApp
-              <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </a>
             <a
               href="mailto:lucas@email.com"
-              className="group flex items-center gap-2 px-6 py-3 bg-[#0f0f10] border border-[#1f1f23] text-[#f3f4f6] rounded-xl font-medium text-sm hover:border-[#3b82f6]/50 transition-all"
+              className="group flex items-center gap-2 px-6 py-3 bg-[#0f0f10] border border-[#2a2a30] text-[#e5e7eb] rounded-xl font-medium text-sm hover:border-[#3b82f6]/50 hover:text-[#f3f4f6] transition-all duration-300 hover:-translate-y-0.5"
             >
               <Mail className="w-4 h-4" />
               E-mail
-              <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </a>
             <a
               href="https://linkedin.com/in/lucasmatheus"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-6 py-3 bg-[#0f0f10] border border-[#1f1f23] text-[#f3f4f6] rounded-xl font-medium text-sm hover:border-[#3b82f6]/50 transition-all"
+              className="group flex items-center gap-2 px-6 py-3 bg-[#0f0f10] border border-[#2a2a30] text-[#e5e7eb] rounded-xl font-medium text-sm hover:border-[#3b82f6]/50 hover:text-[#f3f4f6] transition-all duration-300 hover:-translate-y-0.5"
             >
               <Linkedin className="w-4 h-4" />
               LinkedIn
-              <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </a>
           </motion.div>
         </motion.div>
@@ -170,11 +192,11 @@ function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 1.8, duration: 0.8 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <a href="#especialidades" className="flex flex-col items-center gap-2 text-[#6b7280] hover:text-[#9ca3af] transition-colors">
-            <span className="text-xs">Explorar</span>
+          <a href="#sobre" className="flex flex-col items-center gap-2 text-[#6b7280] hover:text-[#d1d5db] transition-colors duration-200">
+            <span className="text-xs font-medium">Explorar</span>
             <ChevronDown className="w-5 h-5 animate-bounce" />
           </a>
         </motion.div>
@@ -183,27 +205,90 @@ function HeroSection() {
   );
 }
 
-// Specialties Section
+/* ─────────────────────────────────────────────
+   SOBRE MIM (Nova Seção)
+   ───────────────────────────────────────────── */
+function AboutSection() {
+  const highlights = [
+    { icon: <Wrench className="w-4 h-4" />, text: 'Técnico de TI em Suporte' },
+    { icon: <Cpu className="w-4 h-4" />, text: 'Estruturação de Bancadas' },
+    { icon: <Zap className="w-4 h-4" />, text: 'Automações Inteligentes' },
+    { icon: <Calendar className="w-4 h-4" />, text: 'Infraestrutura para Eventos' }
+  ];
+
+  return (
+    <AnimatedSection className="py-20 sm:py-28 bg-[#0a0a0b] relative">
+      {/* Subtle divider line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-[#1f1f23] to-transparent" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+          {/* Left: Label */}
+          <motion.div variants={fadeInUp} className="lg:col-span-2">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3b82f6]/10 border border-[#3b82f6]/20 text-[#3b82f6] text-xs font-medium mb-4">
+              <User className="w-3 h-3" />
+              SOBRE MIM
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#f3f4f6] tracking-tight">
+              Quem é<br />
+              <span className="text-[#60a5fa]">Lucas Matheus?</span>
+            </h2>
+          </motion.div>
+
+          {/* Right: Content */}
+          <motion.div variants={fadeInUp} className="lg:col-span-3 space-y-5">
+            <p className="text-[#d1d5db] text-base sm:text-lg leading-relaxed">
+              Atuo como <strong className="text-[#f3f4f6] font-semibold">Técnico de TI em Suporte</strong>, com foco prático em montagem e manutenção de hardware, estruturação de bancadas de atendimento e gestão de infraestrutura técnica para eventos de grande porte.
+            </p>
+            <p className="text-[#d1d5db] text-base sm:text-lg leading-relaxed">
+              Paralelamente, desenvolvo <strong className="text-[#f3f4f6] font-semibold">automações e soluções tecnológicas</strong> sob medida — orquestrando IA para conceber softwares utilitários, PWAs e ferramentas internas que resolvem problemas reais de fluxo de trabalho.
+            </p>
+            <p className="text-[#b0b5bf] text-sm sm:text-base leading-relaxed">
+              Minha abordagem é direta: entender o problema, estruturar a solução e entregar resultado. Sem promessas vazias — apenas execução técnica de ponta a ponta.
+            </p>
+
+            {/* Highlight chips */}
+            <div className="flex flex-wrap gap-2 pt-2">
+              {highlights.map((item, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141416] border border-[#1f1f23] text-[#d1d5db] text-xs font-medium"
+                >
+                  <span className="text-[#3b82f6]">{item.icon}</span>
+                  {item.text}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SPECIALTIES SECTION
+   ───────────────────────────────────────────── */
 function SpecialtiesSection() {
   const specialties = [
     {
       icon: <Cpu className="w-6 h-6" />,
       title: 'Suporte Técnico & Hardware',
-      description: 'Montagem de hardware, manutenção térmica (troca de pasta térmica e limpeza preventiva), configuração de BIOS, formatação e otimização de sistemas operacionais, além de cabeamento básico e organização de cabos em bancadas e estações.',
+      description: 'Montagem de hardware, manutenção térmica (troca de pasta térmica e limpeza preventiva), configuração de BIOS, formatação e otimização de sistemas operacionais, além de cabeamento básico e organização de cabos em bancadas e estações (sem atuação em projetos de infraestrutura de rede corporativa complexa).',
       tags: ['Hardware', 'BIOS', 'Manutenção', 'Cabeamento'],
       color: 'blue'
     },
     {
       icon: <Code2 className="w-6 h-6" />,
       title: 'Soluções & Softwares Guiados por IA',
-      description: 'Concepção, arquitetura e direcionamento de aplicações web, PWAs, sistemas de quiosque touch (all-in-one) e ferramentas de automação desenvolvidas em parceria com IA para otimizar fluxos de trabalho reais.',
+      description: 'Concepção, arquitetura e direcionamento de aplicações web, PWAs, sistemas de quiosque touch (all-in-one) e ferramentas de automação (como scripts e gestão financeira) desenvolvidas em parceria com IA para otimizar fluxos de trabalho reais.',
       tags: ['PWA', 'Web Apps', 'Automação', 'IA'],
       color: 'yellow'
     },
     {
       icon: <Calendar className="w-6 h-6" />,
       title: 'Operação e Infraestrutura para Eventos',
-      description: 'Montagem, desmontagem e operação de totens de credenciamento e terminais interativos, além da gestão completa de MediaDesk — recebimento, testes e validação de qualidade de apresentações com palestrantes.',
+      description: 'Montagem, desmontagem e operação de totens de credenciamento e terminais interativos, além da gestão completa de MediaDesk — recebimento, testes e validação de qualidade de apresentações com palestrantes, organização e envio via rede LAN local.',
       tags: ['Eventos', 'MediaDesk', 'Totens', 'LAN'],
       color: 'blue'
     }
@@ -219,7 +304,7 @@ function SpecialtiesSection() {
             COMPETÊNCIAS
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#f3f4f6] mb-4">Minhas Especialidades</h2>
-          <p className="text-[#9ca3af] max-w-2xl mx-auto">
+          <p className="text-[#b0b5bf] max-w-2xl mx-auto">
             Três pilares de atuação que se complementam para entregar soluções completas e eficientes.
           </p>
         </motion.div>
@@ -230,14 +315,14 @@ function SpecialtiesSection() {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="glass-card rounded-2xl p-6 sm:p-8 transition-all duration-300 group"
+              className="glass-card rounded-2xl p-6 sm:p-8 group"
             >
               {/* Icon */}
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${
-                spec.color === 'blue' 
-                  ? 'bg-[#3b82f6]/10 text-[#3b82f6] group-hover:bg-[#3b82f6]/20' 
+                spec.color === 'blue'
+                  ? 'bg-[#3b82f6]/10 text-[#3b82f6] group-hover:bg-[#3b82f6]/20'
                   : 'bg-[#f59e0b]/10 text-[#f59e0b] group-hover:bg-[#f59e0b]/20'
-              } transition-colors`}>
+              } transition-colors duration-300`}>
                 {spec.icon}
               </div>
 
@@ -245,7 +330,7 @@ function SpecialtiesSection() {
               <h3 className="text-lg font-semibold text-[#f3f4f6] mb-3">{spec.title}</h3>
 
               {/* Description */}
-              <p className="text-[#9ca3af] text-sm leading-relaxed mb-6">{spec.description}</p>
+              <p className="text-[#b0b5bf] text-sm leading-relaxed mb-6">{spec.description}</p>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2">
@@ -266,7 +351,43 @@ function SpecialtiesSection() {
   );
 }
 
-// Projects Section
+/* ─────────────────────────────────────────────
+   STATUS BADGE COMPONENT
+   ───────────────────────────────────────────── */
+type ProjectStatus = 'prototype' | 'development' | 'internal';
+
+function StatusBadge({ status }: { status: ProjectStatus }) {
+  const config = {
+    prototype: {
+      icon: <CheckCircle2 className="w-3 h-3" />,
+      label: 'Protótipo Funcional',
+      className: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+    },
+    development: {
+      icon: <Clock className="w-3 h-3" />,
+      label: 'Em Desenvolvimento',
+      className: 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+    },
+    internal: {
+      icon: <Beaker className="w-3 h-3" />,
+      label: 'Projeto Interno / Laboratório',
+      className: 'bg-[#3b82f6]/10 text-[#60a5fa] border-[#3b82f6]/20'
+    }
+  };
+
+  const { icon, label, className } = config[status];
+
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[10px] font-semibold uppercase tracking-wider ${className}`}>
+      {icon}
+      {label}
+    </span>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   PROJECTS SECTION (Status Real dos Projetos)
+   ───────────────────────────────────────────── */
 function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('all');
 
@@ -286,6 +407,7 @@ function ProjectsSection() {
       description: 'Aplicativo desktop em Electron operando em modo quiosque restrito para computadores All-in-One touch (sem teclado ou mouse externos), com segurança offline baseada em TOTP 2FA.',
       tags: ['Electron', 'TOTP 2FA', 'Kiosk', 'Offline'],
       icon: <Monitor className="w-5 h-5" />,
+      status: 'prototype' as ProjectStatus,
       highlight: true
     },
     {
@@ -295,6 +417,7 @@ function ProjectsSection() {
       description: 'Gestor Financeiro — PWA construída com Next.js, Supabase e Vercel, com interface responsiva e modais BottomSheet para gestão financeira prática.',
       tags: ['Next.js', 'Supabase', 'Vercel', 'PWA'],
       icon: <Smartphone className="w-5 h-5" />,
+      status: 'development' as ProjectStatus,
       highlight: false
     },
     {
@@ -304,6 +427,7 @@ function ProjectsSection() {
       description: 'Plataforma interativa de aprendizado de lógica de programação com abordagem neurodidática.',
       tags: ['Educação', 'Lógica', 'Neurodidática'],
       icon: <Globe className="w-5 h-5" />,
+      status: 'development' as ProjectStatus,
       highlight: false
     },
     {
@@ -313,6 +437,7 @@ function ProjectsSection() {
       description: 'Plataforma aberta de educação financeira para democratizar o acesso ao conhecimento financeiro.',
       tags: ['Educação', 'Finanças', 'Open'],
       icon: <Globe className="w-5 h-5" />,
+      status: 'development' as ProjectStatus,
       highlight: false
     },
     {
@@ -322,6 +447,7 @@ function ProjectsSection() {
       description: 'Ferramenta customizada em HTML/JavaScript com calculadora técnica e gerador de moodboard para estudantes de design de interiores.',
       tags: ['HTML', 'JavaScript', 'Design', 'Moodboard'],
       icon: <Monitor className="w-5 h-5" />,
+      status: 'internal' as ProjectStatus,
       highlight: false
     },
     {
@@ -331,6 +457,7 @@ function ProjectsSection() {
       description: 'App privativo de voz e vídeo via WebRTC e Supabase/Firebase para uso familiar sem chip.',
       tags: ['WebRTC', 'Supabase', 'Firebase', 'P2P'],
       icon: <Shield className="w-5 h-5" />,
+      status: 'internal' as ProjectStatus,
       highlight: false
     },
     {
@@ -340,6 +467,7 @@ function ProjectsSection() {
       description: 'Macro customizada para inserção automatizada de slides de logo de eventos entre apresentações de palestrantes.',
       tags: ['VBA', 'PowerPoint', 'Automação'],
       icon: <Zap className="w-5 h-5" />,
+      status: 'internal' as ProjectStatus,
       highlight: false
     },
     {
@@ -349,6 +477,7 @@ function ProjectsSection() {
       description: 'Bot de trade automatizado com Python, Redis, Pandas, API da Binance e Docker para operações automatizadas.',
       tags: ['Python', 'Redis', 'Binance API', 'Docker'],
       icon: <Terminal className="w-5 h-5" />,
+      status: 'development' as ProjectStatus,
       highlight: true
     },
     {
@@ -358,6 +487,7 @@ function ProjectsSection() {
       description: 'Gestão de MediaDesk, validação de arquivos e app web local em Firebase para sincronização em tempo real de slides entre notebooks da equipe técnica.',
       tags: ['MediaDesk', 'Firebase', 'LAN', 'Tempo Real'],
       icon: <Calendar className="w-5 h-5" />,
+      status: 'internal' as ProjectStatus,
       highlight: true
     },
     {
@@ -367,6 +497,7 @@ function ProjectsSection() {
       description: 'Montagem de totens touch, redes LAN offline para transporte rápido de arquivos e organização de displays (ex: TJCC).',
       tags: ['Totens', 'LAN', 'Displays', 'Congressos'],
       icon: <Monitor className="w-5 h-5" />,
+      status: 'internal' as ProjectStatus,
       highlight: false
     },
     {
@@ -376,6 +507,7 @@ function ProjectsSection() {
       description: 'Seleção de hardware, manutenção térmica preventiva com pasta de alta performance e otimização profunda de sistemas e BIOS.',
       tags: ['Montagem', 'Térmica', 'BIOS', 'Otimização'],
       icon: <Cpu className="w-5 h-5" />,
+      status: 'internal' as ProjectStatus,
       highlight: false
     },
     {
@@ -385,12 +517,13 @@ function ProjectsSection() {
       description: 'Técnicas avançadas de cabeamento e organização estruturada em bancadas de atendimento e estações de trabalho.',
       tags: ['Cabeamento', 'Bancada', 'Organização'],
       icon: <Wrench className="w-5 h-5" />,
+      status: 'internal' as ProjectStatus,
       highlight: false
     }
   ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
+  const filteredProjects = activeFilter === 'all'
+    ? projects
     : projects.filter(p => p.category === activeFilter);
 
   return (
@@ -403,8 +536,8 @@ function ProjectsSection() {
             PORTFÓLIO
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#f3f4f6] mb-4">Projetos & Atuações</h2>
-          <p className="text-[#9ca3af] max-w-2xl mx-auto">
-            Uma seleção dos principais projetos e atuações desenvolvidos ao longo da carreira.
+          <p className="text-[#b0b5bf] max-w-2xl mx-auto">
+            Uma seleção dos principais projetos e atuações desenvolvidos. Status transparente de cada iniciativa.
           </p>
         </motion.div>
 
@@ -414,10 +547,10 @@ function ProjectsSection() {
             <button
               key={cat.id}
               onClick={() => setActiveFilter(cat.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                 activeFilter === cat.id
-                  ? 'bg-[#3b82f6]/15 text-[#3b82f6] border border-[#3b82f6]/30'
-                  : 'bg-[#0f0f10] text-[#9ca3af] border border-[#1f1f23] hover:border-[#2a2a30] hover:text-[#f3f4f6]'
+                  ? 'bg-[#3b82f6]/15 text-[#3b82f6] border border-[#3b82f6]/30 shadow-sm shadow-[#3b82f6]/10'
+                  : 'bg-[#0f0f10] text-[#9ca3af] border border-[#1f1f23] hover:border-[#2a2a30] hover:text-[#e5e7eb]'
               }`}
             >
               {cat.icon}
@@ -426,74 +559,88 @@ function ProjectsSection() {
           ))}
         </motion.div>
 
-        {/* Projects grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={`${project.title}-${index}`}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className={`glass-card rounded-2xl p-6 transition-all duration-300 group relative overflow-hidden ${
-                project.highlight ? 'ring-1 ring-[#3b82f6]/20' : ''
-              }`}
-            >
-              {/* Highlight indicator */}
-              {project.highlight && (
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#3b82f6]/10 to-transparent" />
-              )}
+        {/* Projects grid with AnimatePresence for smooth filter transitions */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={`${project.title}-${activeFilter}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.06, ease: [0.25, 0.4, 0.25, 1] }}
+                className={`project-card glass-card rounded-2xl p-6 group relative overflow-hidden ${
+                  project.highlight ? 'ring-1 ring-[#3b82f6]/15' : ''
+                }`}
+              >
+                {/* Highlight gradient overlay */}
+                {project.highlight && (
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#3b82f6]/[0.06] to-transparent pointer-events-none" />
+                )}
 
-              {/* Header */}
-              <div className="flex items-start justify-between mb-4">
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  project.highlight 
-                    ? 'bg-[#3b82f6]/15 text-[#3b82f6]' 
-                    : 'bg-[#1f1f23] text-[#9ca3af] group-hover:text-[#3b82f6]'
-                } transition-colors`}>
-                  {project.icon}
-                </div>
-                <span className="px-2 py-0.5 rounded-md bg-[#1f1f23]/80 text-[#6b7280] text-xs font-mono">
-                  {project.version}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 className="text-base font-semibold text-[#f3f4f6] mb-2 group-hover:text-[#3b82f6] transition-colors">
-                {project.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-[#9ca3af] text-sm leading-relaxed mb-4">
-                {project.description}
-              </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5">
-                {project.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="px-2 py-0.5 rounded bg-[#0f0f10] border border-[#1f1f23] text-[#6b7280] text-xs"
-                  >
-                    {tag}
+                {/* Header: Icon + Version + Status Badge */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                    project.highlight
+                      ? 'bg-[#3b82f6]/15 text-[#3b82f6]'
+                      : 'bg-[#1f1f23] text-[#9ca3af] group-hover:text-[#3b82f6]'
+                  } transition-colors duration-300`}>
+                    {project.icon}
+                  </div>
+                  <span className="px-2 py-0.5 rounded-md bg-[#1f1f23]/80 text-[#6b7280] text-xs font-mono">
+                    {project.version}
                   </span>
-                ))}
-              </div>
+                </div>
 
-              {/* Hover link indicator */}
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink className="w-4 h-4 text-[#3b82f6]" />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                {/* Status Badge */}
+                <div className="mb-3">
+                  <StatusBadge status={project.status} />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-base font-semibold text-[#f3f4f6] mb-2 group-hover:text-[#60a5fa] transition-colors duration-300">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-[#b0b5bf] text-sm leading-relaxed mb-4">
+                  {project.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-0.5 rounded bg-[#0f0f10] border border-[#1f1f23] text-[#6b7280] text-xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Hover link indicator */}
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ExternalLink className="w-4 h-4 text-[#3b82f6]" />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </AnimatedSection>
   );
 }
 
-// Contact Section
+/* ─────────────────────────────────────────────
+   CONTACT SECTION
+   ───────────────────────────────────────────── */
 function ContactSection() {
   return (
     <AnimatedSection className="py-24 sm:py-32 section-gradient">
@@ -504,7 +651,7 @@ function ContactSection() {
             CONTATO
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#f3f4f6] mb-4">Vamos trabalhar juntos?</h2>
-          <p className="text-[#9ca3af] max-w-xl mx-auto">
+          <p className="text-[#b0b5bf] max-w-xl mx-auto">
             Estou disponível para novos projetos, consultorias e parcerias. Entre em contato pelo canal de sua preferência.
           </p>
         </motion.div>
@@ -515,9 +662,9 @@ function ContactSection() {
             href="https://wa.me/5500000000000"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-2xl p-6 text-center group hover:border-emerald-500/30 transition-all"
+            className="glass-card rounded-2xl p-6 text-center group hover:border-emerald-500/30 transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-500/20 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-500/20 transition-colors duration-300">
               <MessageCircle className="w-6 h-6" />
             </div>
             <h3 className="text-sm font-semibold text-[#f3f4f6] mb-1">WhatsApp</h3>
@@ -527,9 +674,9 @@ function ContactSection() {
           {/* Email */}
           <a
             href="mailto:lucas@email.com"
-            className="glass-card rounded-2xl p-6 text-center group hover:border-[#3b82f6]/30 transition-all"
+            className="glass-card rounded-2xl p-6 text-center group hover:border-[#3b82f6]/30 transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-xl bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#3b82f6]/20 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#3b82f6]/20 transition-colors duration-300">
               <Mail className="w-6 h-6" />
             </div>
             <h3 className="text-sm font-semibold text-[#f3f4f6] mb-1">E-mail</h3>
@@ -541,9 +688,9 @@ function ContactSection() {
             href="https://linkedin.com/in/lucasmatheus"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-2xl p-6 text-center group hover:border-[#3b82f6]/30 transition-all"
+            className="glass-card rounded-2xl p-6 text-center group hover:border-[#3b82f6]/30 transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-xl bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#3b82f6]/20 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#3b82f6]/20 transition-colors duration-300">
               <Linkedin className="w-6 h-6" />
             </div>
             <h3 className="text-sm font-semibold text-[#f3f4f6] mb-1">LinkedIn</h3>
@@ -555,7 +702,9 @@ function ContactSection() {
   );
 }
 
-// Footer
+/* ─────────────────────────────────────────────
+   FOOTER
+   ───────────────────────────────────────────── */
 function Footer() {
   return (
     <footer id="contato" className="border-t border-[#1f1f23]/60 bg-[#0a0a0b]">
@@ -563,7 +712,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] flex items-center justify-center shadow-lg shadow-[#3b82f6]/10">
               <Terminal className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -574,13 +723,13 @@ function Footer() {
 
           {/* Links */}
           <div className="flex items-center gap-6">
-            <a href="mailto:lucas@email.com" className="text-[#6b7280] hover:text-[#3b82f6] transition-colors">
+            <a href="mailto:lucas@email.com" className="text-[#6b7280] hover:text-[#3b82f6] transition-colors duration-200">
               <Mail className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com/in/lucasmatheus" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#3b82f6] transition-colors">
+            <a href="https://linkedin.com/in/lucasmatheus" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#3b82f6] transition-colors duration-200">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-emerald-400 transition-colors">
+            <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-emerald-400 transition-colors duration-200">
               <MessageCircle className="w-5 h-5" />
             </a>
           </div>
@@ -600,12 +749,15 @@ function Footer() {
   );
 }
 
-// Main App
+/* ─────────────────────────────────────────────
+   MAIN APP
+   ───────────────────────────────────────────── */
 export default function App() {
   return (
     <div className="min-h-screen bg-[#050505] text-[#f3f4f6] font-sans">
       <Navbar />
       <HeroSection />
+      <AboutSection />
       <SpecialtiesSection />
       <ProjectsSection />
       <ContactSection />
